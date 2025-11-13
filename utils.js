@@ -35,12 +35,13 @@ function fill(x,y,color){
     while (queue.length > 0 && iterations < 500000){ 
         const {x,y} = queue.shift()
         const currentColor = getColor(x,y,imgData)
-        if (currentColor.r === scol.r && currentColor.g === scol.g && currentColor.b === scol.b && currentColor.a === scol.a) {
-            const index = (y * imgData.width + x) * 4
+        const index = (y * imgData.width + x) * 4
             imgData.data[index] = color.r
             imgData.data[index + 1] = color.g
             imgData.data[index + 2] = color.b
             imgData.data[index + 3] = color.a
+        if (currentColor.r === scol.r && currentColor.g === scol.g && currentColor.b === scol.b && currentColor.a === scol.a) {
+            
 
             if (x > 0) queue.push({x: x - 1, y})
             if (x < imgData.width - 1) queue.push({x: x + 1, y})
