@@ -59,3 +59,9 @@ function hexToRgba(hex){
     const b = bigint & 255
     return {r, g, b, a: 255}
 }
+function makeFile(name){
+    const link = document.createElement('a')
+    link.download = name
+    link.href = canvas.toDataURL()
+    link.click()
+}

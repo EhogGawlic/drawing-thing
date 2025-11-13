@@ -19,6 +19,7 @@
             <input type="number" id="pensize" value="2" min="1" max="100" onchange="pwid=this.value"><br>
             <label for="color">Color:</label><br>
             <input type="color" id="color" value="#000000" onchange="ccolor = hexToRgba(this.value)"><br>
+            <button onclick="makeFile('drawing.png')">Save as PNG</button>
         </div>
         <canvas id="canvas"></canvas>
         <script src="./canvasrestyle.js"></script>
