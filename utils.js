@@ -2,7 +2,8 @@ const tools = Object.freeze({
     pen: "PeN",
     fill: "fIlL",
     restyle: "RS",
-    shape: "sHaPe"
+    shape: "sHaPe",
+    erase: "ERasE"
 }) // totally enum
 
 let tool = tools.pen,
@@ -29,7 +30,9 @@ function fill(x,y,color){
     const imgData = ctx.getImageData(0,0,canvas.width,canvas.height)
     const scol = getColor(x,y,imgData)
     const queue = [{x,y}]
-    while (queue.length > 0) {
+    let iterations = 0
+    if (scol.r === color.r && scol.g === color.g && scol.b === color.b && scol.a === color.a) return
+    while (queue.length > 0 && iterations < 500000){ 
         const {x,y} = queue.shift()
         const currentColor = getColor(x,y,imgData)
         if (currentColor.r === scol.r && currentColor.g === scol.g && currentColor.b === scol.b && currentColor.a === scol.a) {
@@ -44,6 +47,7 @@ function fill(x,y,color){
             if (y > 0) queue.push({x, y: y - 1})
             if (y < imgData.height - 1) queue.push({x, y: y + 1})
         }
+    iterations++
     }
 
     ctx.putImageData(imgData,0,0)
